@@ -1,5 +1,6 @@
 # File Structure Explanation
 - `.env` file belongs **outside** `src` as well as our config files
+    - `.env` file should contain our `DB_URI` variable for connecting to the database, and `COOKIE_SECRET` variable if we want session
 - ### `src`
     - ### `components`
         - Same as our regular `react` frontend this is for all of our reusable components
