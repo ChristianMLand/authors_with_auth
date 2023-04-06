@@ -4,10 +4,9 @@ import withSessionRoute from "@/utils/session";
 
 async function handler(req, res) {
     switch (req.method) {
-        case "GET":
-            // get requests should return logged-in user stored in session
+        case "GET": // get requests should return logged-in user stored in session
             return res.send(req.session.user);
-        case "POST":
+        case "POST": // post requests add the user to session
             await connect("authorsDB"); // only need to connect to DB if logging in
             return User.checkLogin(req.body)
                 .then(async user => {
@@ -16,8 +15,8 @@ async function handler(req, res) {
                     return res.json(user);
                 })
                 .catch(error => res.status(401).json(error))
-        case "DELETE":
-            req.session.destroy(); // clear session
+        case "DELETE": // delete requests clear session
+            req.session.destroy();
             return res.json({ message: "success" });
         default:
             return res.status(404).json({ message: "404 not found" });

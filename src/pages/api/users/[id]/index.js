@@ -1,5 +1,4 @@
 import connect from '@/utils/connect';
-import Author from '@/models/author.model';
 import User from "@/models/user.model"; // have to import for populate to work
 
 export default async function handler(req, res) {
