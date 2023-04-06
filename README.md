@@ -24,13 +24,13 @@
         - Should use the `module` structure for our css files, to only generate the `CSS` we actually end up using for a given component.
     - ### `utils` (or `config`)
         - Helper functions to be used throughout the project
-        - Our `mongoose` connection function here
+        - Our `mongoose` connection function belongs here
         - Our wrapper to provide session to routes belongs here
-        - Our wrapper to provide `react` context to components belongs here
+        - Our wrapper to provide context to components belongs here
     - ### `middleware.js`
         - This is where we define any extra middleware we might need
         - The check to make sure a user is authenticated before letting them use the site belongs here
-        - probably not necessary if not including login/reg authentication
+        - can be omitted entirely if not including login/reg authentication
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
