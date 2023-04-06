@@ -1,0 +1,67 @@
+.layout, .main {
+    display: flex;
+    gap: 1rem;
+    width: 50vw;
+}
+
+.layout {
+    flex-direction: column;
+}
+
+.table, .form {
+    box-shadow: 0 0 15px -5px black;
+    width: 100%;
+    border-radius: 3px; 
+    overflow: hidden;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.table th {
+    border-bottom: 2px solid white;
+}
+
+.button {
+    padding: 0.25rem 1.5rem;
+    border-radius: 3px;
+    border: 2px solid #00000076;
+    background: #08070c;
+    margin: 0.25rem;
+    text-decoration: none;
+    color: white;
+}
+
+.form {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form input {
+    border: 3px solid #00000076;
+    padding: 0.25rem;
+    border-radius: 3px;
+    width: 100%;
+}
+
+.form div {
+    align-self: center;
+    width: 100%;
+    text-align: center;
+}
+
+.error {
+    text-align: center;
+    background: #be2539;
+    border: 2px solid #00000043;
+    border-radius: 3px;
+    padding: 0.25rem;
+}
