@@ -1,3 +1,37 @@
+# File Structure Explanation
+- `.env` file belongs **outside** `src` as well as our config files
+- ### `src`
+    - ### `components`
+        - Same as our regular `react` frontend this is for all of our reusable components
+    - ### `models`
+        - Same as our regular `express` backend this is for all of our mongoose models
+        - can be omitted entirely if we only want a client app
+    - ### `pages`
+        - ### `api`
+            - Replaces our routes and controllers from `express`
+            - File/Folder names determine the route, while each file is essentially a controller
+            - route variables should use the `[varName]` syntax
+            - files named `index` will be treated as `/`
+            - syntax for our handlers is identical to `express`
+            - can be omitted entirely if we only want a client app
+        - ### Other sub-directories
+            - These replace our client-side routes and views from `react`
+            - File/Folder names determine the route, while each file is essentially a view component
+            - Same naming conventions as the `api` directory
+    - ### `styles`
+        - All of our `CSS` files should belong here
+        - Should use the `module` structure for our css files, to only generate the `CSS` we actually end up using for a given component.
+    - ### `utils` (or `config`)
+        - Helper functions to be used throughout the project
+        - Our `mongoose` connection function here
+        - Our wrapper to provide session to routes belongs here
+        - Our wrapper to provide `react` context to components belongs here
+    - ### middleware.js
+        - This is where we define any extra middleware we might need
+        - The check to make sure a user is authenticated before letting them use the site belongs here
+        - probably not necessary if not including login/reg authentication
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -13,26 +47,3 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
