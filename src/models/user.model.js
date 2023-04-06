@@ -34,12 +34,9 @@ UserSchema.pre('validate', function(next) {
     next();
 });
 // hash the password before storing in db
-UserSchema.pre('save', function(next) { 
-    bcrypt.hash(this.password, 10)
-        .then(hash => {
-            this.password = hash;
-            next();
-        });
+UserSchema.pre('save', async function(next) { 
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
 });
 // define a static method for our model to handle login validations
 UserSchema.statics.checkLogin = function({ email, password }) { 
