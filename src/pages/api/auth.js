@@ -5,7 +5,7 @@ import withSessionRoute from "@/utils/session";
 async function handler(req, res) {
     switch (req.method) {
         case "GET": // get requests should return logged-in user stored in session
-            return res.send(req.session.user);
+            return res.json(req.session.user);
         case "POST": // post requests add the user to session
             await connect("authorsDB"); // only need to connect to DB if logging in
             return User.checkLogin(req.body)
