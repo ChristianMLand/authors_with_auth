@@ -17,6 +17,7 @@ export const config = {
      // ensure user is logged in when visiting any of these routes
     matcher: [
         '/authors/:id*', 
-        '/api/authors/:id*'
+        '/api/authors/:id*',
+        '/api/users/:id+'
     ]
 }

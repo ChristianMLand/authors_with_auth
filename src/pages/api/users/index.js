@@ -1,21 +1,19 @@
 import connect from '@/utils/connect';
 import User from '@/models/user.model';
-import withSessionRoute from "@/utils/session";
 
-async function handler(req, res) {
-    if (req.method !== "POST")
-        return res.status(404).json({ message : "404 not found"});
+export default async function handler(req, res) {
+    await connect("authorsDB");
 
-    await connect("authorsDB"); // connect to DB
-
-    try {
-        const user = await User.create(req.body);
-        req.session.user = user;
-        await req.session.save(); // save user to session
-        return res.json(user);
-    } catch (error) {
-        return res.status(400).json(error);
+    switch (req.method) {
+        case "GET":
+            return User.find()
+                .then(allUsers => res.json(allUsers))
+                .catch(error => res.status(400).json(error));
+        case "POST":
+            return User.create(req.body)
+                .then(user => res.json(user)) // could add user to session if we wanted to login immediately
+                .catch(error => res.status(400).json(error));
+        default:
+            return res.status(404).json({ message : "404 not found"});
     }
 }
-
-export default withSessionRoute(handler); // give the route access to session

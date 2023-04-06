@@ -15,6 +15,7 @@ export default function Form({ name, action, fields, defaults, method="post", ca
         axios[method](action, formData)
             .then(_ => router.push("/authors")) // redirect to /authors route after succeeding
             .catch(err => setFormErrors(err.response.data.errors));
+        setFormData(initialValues);
     }
 
     const handleChange = e => {
