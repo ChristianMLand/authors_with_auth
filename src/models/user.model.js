@@ -44,13 +44,8 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.statics.login = function({ email, password }) { // define a static method for our model to handle login validations
     return this.findOne({ email }).then(async user => {
-        const errors = new Error.ValidationError(this);
         if (!(user && await bcrypt.compare(password, user.password))) {
-            errors.errors["password"] = new Error.ValidatorError({ // since we show same message for email/password, path is arbitrary
-                path: "password",
-                message: "Invalid Credentials"
-            });
-            throw errors;
+            throw new this().invalidate("password", "Invalid Credentials");
         }
         return user;
     });
