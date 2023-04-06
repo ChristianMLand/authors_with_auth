@@ -1,4 +1,4 @@
-import { Schema, model, models, Error } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 import bcrypt from "bcrypt";
 
 const UserSchema = new Schema({
@@ -22,27 +22,27 @@ const UserSchema = new Schema({
         minlength: [8, "Password must be at least 8 characters long"]
     }
 }, { timestamps: true });
-
-UserSchema.virtual("confirmPassword") // set confirmPassword as a virtual field so it doesn't get stored in DB
+// set confirmPassword as a virtual field so it doesn't get stored in DB
+UserSchema.virtual("confirmPassword") 
     .get(function() { return this._confirmPassword })
     .set(function(val) { return this._confirmPassword = val });
-
+// validate that password and confirm password match when registering
 UserSchema.pre('validate', function(next) {
-    if (this.password !== this.confirmPassword) { // validate that password and confirm password match when registering
+    if (this.password !== this.confirmPassword) { 
         this.invalidate('confirmPassword', 'Password must match confirm password');
     }
     next();
 });
-
+// hash the password before storing in db
 UserSchema.pre('save', function(next) { 
-    bcrypt.hash(this.password, 10) // hash the password before storing in db
+    bcrypt.hash(this.password, 10)
         .then(hash => {
             this.password = hash;
             next();
         });
 });
-
-UserSchema.statics.login = function({ email, password }) { // define a static method for our model to handle login validations
+// define a static method for our model to handle login validations
+UserSchema.statics.checkLogin = function({ email, password }) { 
     return this.findOne({ email }).then(async user => {
         if (!(user && await bcrypt.compare(password, user.password))) {
             throw new this().invalidate("password", "Invalid Credentials");
@@ -50,5 +50,5 @@ UserSchema.statics.login = function({ email, password }) { // define a static me
         return user;
     });
 }
-
-export default models.User || model('User', UserSchema); // models can't be registered more than once, so need to check if already registered
+// models can't be registered more than once, so need to check if already registered
+export default models.User || model('User', UserSchema); 

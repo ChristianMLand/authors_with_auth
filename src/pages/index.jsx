@@ -16,7 +16,7 @@ export default function LogReg() {
             />
             <Form 
                 name="Login"
-                action="/api/auth/login"
+                action="/api/auth"
                 fields={{
                     email : "text",
                     password : "password"

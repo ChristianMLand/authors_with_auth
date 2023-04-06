@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 export default function Layout({ children, home }) {
     const router = useRouter();
     const handleClick = () => {
-        axios.post("/api/auth/logout")
+        axios.delete("/api/auth")
             .then(_ => router.push("/"))
     }
     return (

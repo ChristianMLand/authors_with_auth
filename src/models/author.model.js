@@ -11,5 +11,5 @@ const AuthorSchema = new Schema({
         ref: "User"
     }
 }, { timestamps: true });
-
-export default models.Author || model('Author', AuthorSchema); // models can't be registered more than once, so need to check if already registered
+// models can't be registered more than once, so need to check if already registered
+export default models.Author || model('Author', AuthorSchema); 
