@@ -39,13 +39,12 @@ UserSchema.pre('save', async function(next) {
     next();
 });
 // define a static method for our model to handle login validations
-UserSchema.statics.checkLogin = function({ email, password }) { 
-    return this.findOne({ email }).then(async user => {
-        if (!(user && await bcrypt.compare(password, user.password))) {
-            throw new this().invalidate("password", "Invalid Credentials");
-        }
-        return user;
-    });
+UserSchema.statics.checkLogin = async function({ email, password }) { 
+    const user = await this.findOne({ email });
+    if (!(user && await bcrypt.compare(password, user.password))) {
+        throw new this().invalidate("password", "Invalid Credentials");
+    }
+    return user;
 }
 // models can't be registered more than once, so need to check if already registered
 export default models.User || model('User', UserSchema); 
