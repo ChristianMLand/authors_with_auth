@@ -10,7 +10,6 @@ const UserSchema = new Schema({
     email : {
         type: String,
         required: [true, "Email is required"],
-        unique: true,
         validate: {
             validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
             message: "Please enter a valid email"
@@ -24,11 +23,9 @@ const UserSchema = new Schema({
 }, { timestamps: true });
 // set confirmPassword as a virtual field so it doesn't get stored in DB
 UserSchema.virtual("confirmPassword") 
-    .get(function() { return this._confirmPassword })
-    .set(function(val) { return this._confirmPassword = val });
 // validate that password and confirm password match when registering
 UserSchema.pre('validate', function(next) {
-    if (this.password !== this.confirmPassword) { 
+    if (this.password !== this.confirmPassword) {
         this.invalidate('confirmPassword', 'Password must match confirm password');
     }
     next();

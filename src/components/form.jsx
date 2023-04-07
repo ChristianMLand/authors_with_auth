@@ -8,14 +8,15 @@ export default function Form({ name, action, fields, defaults, method="post", ca
     const router = useRouter();
     const initialValues = defaults || Object.keys(fields).reduce((prev, field) => ({ ...prev, [field]: "" }), {});
     const [formData, setFormData] = useState(initialValues);
-    const [formErrors, setFormErrors] = useState();
+    const [formErrors, setFormErrors] = useState({});
 
     const handleSubmit = e => {
         e.preventDefault();
+        setFormErrors({}); // clear previous errors
         axios[method](action, formData)
-            .then(_ => router.push("/authors")) // redirect to /authors route after succeeding
+            .then(_ => router.push("/authors"))
             .catch(err => setFormErrors(err.response.data.errors));
-        setFormData(initialValues);
+        setFormData(initialValues); // clear form inputs
     }
 
     const handleChange = e => {
@@ -31,7 +32,7 @@ export default function Form({ name, action, fields, defaults, method="post", ca
                 </div>
             ))}
             <div>
-                { cancellable && <Link href="/authors" className={styles.button}>Cancel</Link>}
+                { cancellable && <Link href="/authors" className={styles.button}>Cancel</Link> }
                 <button className={styles.button}>{name}</button>
             </div>
         </form>
