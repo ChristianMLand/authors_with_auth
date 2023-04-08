@@ -28,7 +28,7 @@
         - All of our `CSS` files should belong here
         - Should use the `module` structure for our css files, to only generate the `CSS` we actually end up using for a given component.
         - can be omitted if we only want a server app
-    - ### `utils` (or `config`)
+    - ### `utils` (or `config` or `libs`)
         - Helper functions to be used throughout the project
         - Our `mongoose` connection function belongs here
         - Our `socket.io` connection function belongs here
