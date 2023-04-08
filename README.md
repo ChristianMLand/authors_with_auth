@@ -27,7 +27,8 @@
     - ### `utils` (or `config`)
         - Helper functions to be used throughout the project
         - Our `mongoose` connection function belongs here
-        - Our wrapper to provide session to routes belongs here
+        - Our `socket.io` connection function belongs here
+        - Our wrapper to provide session to routes belongs here 
         - Our wrapper to provide context to components belongs here
     - ### `middleware.js`
         - This is where we define any extra middleware we might need
