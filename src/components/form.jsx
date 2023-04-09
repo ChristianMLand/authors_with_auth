@@ -4,9 +4,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function Form({ name, action, fields, defaults, method="post", cancellable=false }) {
+export default function Form({ name, action, fields, values, method="post", cancellable=false }) {
     const router = useRouter();
-    const initialValues = defaults || Object.keys(fields).reduce((prev, field) => ({ ...prev, [field]: "" }), {});
+    const initialValues = values || Object.keys(fields).reduce((prev, field) => ({ ...prev, [field]: "" }), {});
     const [formData, setFormData] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
 

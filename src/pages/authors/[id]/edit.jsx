@@ -26,7 +26,7 @@ export default function Edit() {
                 action={ `/api/authors/${ router.query.id }` }
                 method="put"
                 fields={{ name : "text" }}
-                defaults={ author }
+                values={ author }
                 cancellable
             />
         </Layout>
