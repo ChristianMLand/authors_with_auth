@@ -3,16 +3,15 @@ import axios from 'axios';
 import Link from 'next/link';
 import Layout from '@/components/layout';
 import styles from '@/styles/base.module.css';
+import { useAppContext } from '@/utils/context';
 
 export default function Dashboard() {
     const [authors, setAuthors] = useState([]);
-    const [loggedUser, setLoggedUser] = useState();
+    const { loggedUser } = useAppContext();
 
     useEffect(() => {
         axios.get('/api/authors')
             .then(res => setAuthors(res.data));
-        axios.get('/api/auth') // get logged in user from session
-            .then(res => setLoggedUser(res.data))
     }, []);
 
     const handleDelete = id => {
@@ -20,11 +19,8 @@ export default function Dashboard() {
             .then(_ => setAuthors(prev => prev.filter(author => author._id !== id)))
     }
 
-    if (!loggedUser || !authors) return <h1>Loading...</h1>;
-
     return (
         <Layout home>
-            <p>Welcome {loggedUser.username}!</p>
             <table className={styles.table}>
                 <thead>
                     <tr>
