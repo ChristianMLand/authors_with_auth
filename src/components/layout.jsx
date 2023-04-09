@@ -10,7 +10,8 @@ export default function Layout({ children, home }) {
     const router = useRouter();
 
     useEffect(() => {
-        if (!loggedUser) {
+        // only retrieve the logged-in user if they aren't already in context
+        if (!loggedUser) { 
             axios.get("/api/auth")
                 .then(res => setLoggedUser(res.data));
         }

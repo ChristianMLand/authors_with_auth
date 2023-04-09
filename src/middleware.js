@@ -3,7 +3,7 @@ import { getIronSession } from "iron-session/edge";
 
 export const middleware = async req => {
     const res = NextResponse.next();
-    // set in env file, must be at least 32 chars
+    // make sure to set COOKIE_SECRET in env file, must be at least 32 chars
     const session = await getIronSession(req, res, {
         cookieName: "UserCookie",
         password: process.env.COOKIE_SECRET, 
