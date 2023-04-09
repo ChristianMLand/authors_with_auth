@@ -1,8 +1,8 @@
 import connect from "@/utils/connect";
-import Author from "@/models/author.model";
-import withSessionRoute from "@/utils/session";
 import User from "@/models/user.model";
 // have to import User model for populate to work
+import Author from "@/models/author.model";
+import withSessionRoute from "@/utils/session";
 
 async function handler(req, res) {
     await connect("authorsDB");

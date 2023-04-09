@@ -1,5 +1,5 @@
-import User from "@/models/user.model";
 import connect from "@/utils/connect";
+import User from "@/models/user.model";
 import withSessionRoute from "@/utils/session";
 
 async function handler(req, res) {

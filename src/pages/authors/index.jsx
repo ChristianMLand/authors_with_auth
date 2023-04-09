@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Layout from "@/components/layout";
 import styles from "@/styles/base.module.css";
+import { useState, useEffect } from "react";
 import { useAppContext } from "@/utils/context";
 
 export default function Dashboard() {
@@ -19,7 +19,7 @@ export default function Dashboard() {
             .then(_ => setAuthors(prev => prev.filter(author => author._id !== id)));
     };
 
-    if (!authors) return <Layout home />
+    if (!authors) return <Layout home/>
 
     return (
         <Layout home>
