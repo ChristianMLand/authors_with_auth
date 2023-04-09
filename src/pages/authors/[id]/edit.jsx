@@ -16,7 +16,7 @@ export default function Edit() {
         }
     },[router.isReady]);
 
-    if (!author) return <h1>Loading...</h1>;
+    if (!author) return <Layout />;
 
     return (
         <Layout>

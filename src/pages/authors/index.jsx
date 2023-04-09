@@ -19,6 +19,8 @@ export default function Dashboard() {
             .then(_ => setAuthors(prev => prev.filter(author => author._id !== id)));
     };
 
+    if (!authors) return <Layout home />
+
     return (
         <Layout home>
             <table className={ styles.table }>
