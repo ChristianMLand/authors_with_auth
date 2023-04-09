@@ -1,13 +1,13 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models } from "mongoose";
 import bcrypt from "bcrypt";
 
 const UserSchema = new Schema({
-    username : { 
+    username: { 
         type: String,
         required: [true, "Username is required"],
         minLength: [3, "Username must be at least 3 characters long"]
     },
-    email : {
+    email: {
         type: String,
         required: [true, "Email is required"],
         validate: {
@@ -22,16 +22,16 @@ const UserSchema = new Schema({
     }
 }, { timestamps: true });
 // set confirmPassword as a virtual field so it doesn't get stored in DB
-UserSchema.virtual("confirmPassword") 
+UserSchema.virtual("confirmPassword");
 // validate that password and confirm password match when registering
-UserSchema.pre('validate', function(next) {
+UserSchema.pre("validate", function(next) {
     if (this.password !== this.confirmPassword) {
-        this.invalidate('confirmPassword', 'Password must match confirm password');
+        this.invalidate("confirmPassword", "Password must match confirm password");
     }
     next();
 });
 // hash the password before storing in db
-UserSchema.pre('save', async function(next) { 
+UserSchema.pre("save", async function(next) { 
     this.password = await bcrypt.hash(this.password, 10);
     next();
 });
@@ -42,6 +42,6 @@ UserSchema.statics.checkLogin = async function({ email, password }) {
         throw new this().invalidate("password", "Invalid Credentials");
     }
     return user;
-}
+};
 // models can't be registered more than once, so need to check if already registered
-export default models.User || model('User', UserSchema); 
+export default models.User || model("User", UserSchema); 

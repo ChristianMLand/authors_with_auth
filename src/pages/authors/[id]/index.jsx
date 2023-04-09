@@ -8,10 +8,10 @@ export default function View() {
     const [author, setAuthor] = useState();
 
     useEffect(() => {
-        if (router.isReady) { // need to check that the router has loaded the query params first
-            axios.get(`/api/authors/${router.query.id}`)
-                .then(res => setAuthor(res.data))
-                .catch(console.error);
+        // need to check that the router has loaded the query params first
+        if (router.isReady) { 
+            axios.get(`/api/authors/${ router.query.id }`)
+                .then(res => setAuthor(res.data));
         }
     },[router.isReady]); 
 
@@ -19,8 +19,8 @@ export default function View() {
 
     return (
         <Layout>
-            <h1>{author.name}</h1>
-            <p>Posted by: {author.user.username}</p>
+            <h1>{ author.name }</h1>
+            <p>Posted by: { author.user.username }</p>
         </Layout>
     );
 }

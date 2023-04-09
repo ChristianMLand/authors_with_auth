@@ -1,7 +1,7 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models } from "mongoose";
 
 const AuthorSchema = new Schema({
-    name : { 
+    name: { 
         type: String,
         required: [true, "Name is required"],
         minLength: [3, "Name must be at least 3 characters long"]

@@ -1,7 +1,8 @@
-import connect from '@/utils/connect';
-import Author from '@/models/author.model';
-import User from "@/models/user.model"; // have to import for populate to work
-import withSessionRoute from '@/utils/session';
+import connect from "@/utils/connect";
+import Author from "@/models/author.model";
+import withSessionRoute from "@/utils/session";
+import User from "@/models/user.model";
+// have to import User model for populate to work
 
 async function handler(req, res) {
     await connect("authorsDB");
@@ -12,11 +13,12 @@ async function handler(req, res) {
                 .then(allAuthors => res.json(allAuthors))
                 .catch(error => res.status(400).json(error));
         case "POST":
-            return Author.create({...req.body, user: req.session.user._id })
+            // grab the logged-in user's id from session
+            return Author.create({ ...req.body, user: req.session.user._id })
                 .then(author => res.json(author))
                 .catch(error => res.status(400).json(error));
         default:
-            return res.status(404).json({ message : "404 not found"});
+            return res.status(404).json({ message: "404 not found" });
     }
 }
 

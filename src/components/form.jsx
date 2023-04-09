@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/router";
 import styles from "@/styles/base.module.css";
 import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Form({ name, action, fields, defaults, method="post", cancellable=false }) {
     const router = useRouter();
@@ -12,29 +12,31 @@ export default function Form({ name, action, fields, defaults, method="post", ca
 
     const handleSubmit = e => {
         e.preventDefault();
-        setFormErrors({}); // clear previous errors
+        // clear previous errors
+        setFormErrors({}); 
         axios[method](action, formData)
             .then(_ => router.push("/authors"))
             .catch(err => setFormErrors(err.response.data.errors));
-        setFormData(initialValues); // clear form inputs
-    }
+        // clear form inputs
+        setFormData(initialValues); 
+    };
 
     const handleChange = e => {
-        setFormData({ ...formData, [e.target.name] : e.target.value });
-    }
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     return (
-        <form onSubmit={ handleSubmit } className={styles.form}>
+        <form onSubmit={ handleSubmit } className={ styles.form }>
             { Object.entries(fields).map(([name, type], i) => ( // iterate over fields and generate inputs/errors for each
-                <div key={i}>
-                    <input placeholder={name} type={type} name={name} value={formData[name]} onChange={handleChange}/>
-                    { formErrors && formErrors[name] && <p className={styles.error}>{formErrors[name].message}</p> }
+                <div key={ i }>
+                    <input placeholder={ name } type={ type } name={ name } value={ formData[name] } onChange={ handleChange }/>
+                    { formErrors && formErrors[name] && <p className={ styles.error }>{ formErrors[name].message }</p> }
                 </div>
             ))}
             <div>
-                { cancellable && <Link href="/authors" className={styles.button}>Cancel</Link> }
-                <button className={styles.button}>{name}</button>
+                { cancellable && <Link href="/authors" className={ styles.button }>Cancel</Link> }
+                <button className={ styles.button }>{ name }</button>
             </div>
         </form>
-    )
+    );
 }

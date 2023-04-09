@@ -6,9 +6,9 @@ export default function New() {
         <Layout>
             <p>Create an Author:</p>
             <Form 
-                name = "Add"
-                action = "/api/authors"
-                fields = {{ name : "text" }}
+                name="Add"
+                action="/api/authors"
+                fields={{ name: "text" }}
                 cancellable
             />
         </Layout>
