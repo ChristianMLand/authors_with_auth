@@ -26,7 +26,6 @@
             - can be omitted entirely if we only want server app
     - ### `styles`
         - All of our `CSS` files should belong here
-        - Should use the `module` structure for our css files, to only generate the `CSS` we actually end up using for a given component.
         - can be omitted if we only want a server app
     - ### `utils` (or `config` or `libs`)
         - Helper functions to be used throughout the project
@@ -37,7 +36,7 @@
         - can be omitted if not needed
     - ### `middleware.js`
         - This is where we define any extra middleware we might need
-        - The check to make sure a user is authenticated before letting them use the site belongs here
+        - The check to make sure a user is authenticated before letting them use parts of the site belongs here
         - can be omitted entirely if not including login/reg authentication
 
 
